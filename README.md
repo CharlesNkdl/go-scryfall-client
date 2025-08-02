@@ -1,0 +1,1 @@
+# go-scryfall-client
