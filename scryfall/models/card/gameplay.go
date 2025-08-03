@@ -2,7 +2,7 @@ package card
 
 type Gameplay struct {
 	AllParts       []Related  `json:"all_parts"`
-	CardFaces      []CardFace `json:"card_faces,omitempty"`
+	CardFaces      []Face     `json:"card_faces,omitempty"`
 	Cmc            *float32   `json:"cmc,omitempty"`
 	ColorIdentity  []Color    `json:"color_identity,omitempty"`
 	ColorIndicator []Color    `json:"color_indicator,omitempty"`
