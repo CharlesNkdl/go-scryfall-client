@@ -10,6 +10,7 @@ import (
 
 	"github.com/cnkdl/go-scryfall-client/scryfall/errors"
 	"github.com/cnkdl/go-scryfall-client/scryfall/models"
+	"github.com/cnkdl/go-scryfall-client/scryfall/services"
 )
 
 const (
@@ -22,11 +23,11 @@ type Client struct {
 
 	RateLimiter *rate.Limiter // asked by scryfall API documentation
 
-	Cards    *CardsService
-	Sets     *SetsService
-	Rulings  *RulingsService
-	Catalogs *CatalogsService
-	Symbols  *SymbolsService
+	Cards    *services.CardService
+	Sets     *services.SetService
+	Rulings  *services.RulingService
+	Catalogs *services.CatalogService
+	Symbols  *services.SymbolService
 }
 
 func NewClient() *Client {
@@ -37,11 +38,11 @@ func NewClient() *Client {
 		BaseUrl:     defaultBaseURL,
 		RateLimiter: rate.NewLimiter(1, 5),
 	}
-	c.Cards = &CardsService{client: c}
-	c.Sets = &SetsService{client: c}
-	c.Rulings = &RulingsService{client: c}
-	c.Catalogs = &CatalogsService{client: c}
-	c.Symbols = &SymbolsService{client: c}
+	c.Cards = &services.CardService{Client: c}
+	c.Sets = &services.SetService{Client: c}
+	c.Rulings = &services.RulingService{Client: c}
+	c.Catalogs = &services.CatalogService{Client: c}
+	c.Symbols = &services.SymbolService{Client: c}
 
 	return c
 }
