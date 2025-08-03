@@ -10,7 +10,6 @@ import (
 )
 
 func main() {
-	// Créer un client Scryfall
 	client := scryfall.NewClient()
 	cardService := client.Cards
 
@@ -18,8 +17,6 @@ func main() {
 	defer cancel()
 
 	fmt.Println("=== Test Scryfall API Client ===\n")
-
-	// Test 1: Recherche par nom exact
 	fmt.Println("1. Test recherche par nom exact: 'Lightning Bolt'")
 	card1, err := cardService.GetByName(ctx, "Lightning Bolt", false)
 	if err != nil {
@@ -35,8 +32,6 @@ func main() {
 
 	}
 	fmt.Println()
-
-	// Test 2: Recherche par nom fuzzy (approximatif)
 	fmt.Println("2. Test recherche fuzzy: 'Lighning Bolt' (avec faute)")
 	card2, err := cardService.GetByName(ctx, "Lighning Bolt", true)
 	if err != nil {
@@ -48,7 +43,6 @@ func main() {
 	}
 	fmt.Println()
 
-	// Test 3: Recherche par ID (utilisez l'ID d'une carte connue)
 	fmt.Println("3. Test recherche par ID")
 	if card1 != nil {
 		card3, err := cardService.GetById(ctx, card1.Id)
@@ -60,7 +54,6 @@ func main() {
 			fmt.Printf("   Scryfall URI: %s\n", card3.ScryfallUri)
 			fmt.Printf("   Rulings URI: %s\n", card3.RulingsUri)
 
-			// Affichage des IDs externes si disponibles
 			if card3.ArenaId != nil {
 				fmt.Printf("   Arena ID: %d\n", *card3.ArenaId)
 			}
@@ -71,7 +64,6 @@ func main() {
 				fmt.Printf("   Multiverse IDs: %v\n", card3.MultiverseIds)
 			}
 
-			// Affichage des faces de carte si c'est une carte double face
 			if len(card3.CardFaces) > 0 {
 				fmt.Printf("   Carte à faces multiples (%d faces)\n", len(card3.CardFaces))
 			}
@@ -79,7 +71,6 @@ func main() {
 	}
 	fmt.Println()
 
-	// Test 4: Recherche d'une carte qui n'existe pas
 	fmt.Println("4. Test recherche carte inexistante")
 	_, err = cardService.GetByName(ctx, "Carte Qui N'Existe Pas Du Tout", false)
 	if err != nil {
@@ -89,7 +80,6 @@ func main() {
 	}
 	fmt.Println()
 
-	// Test 5: Test avec plusieurs cartes populaires
 	fmt.Println("5. Test avec d'autres cartes populaires")
 	popularCards := []string{"Black Lotus", "Ancestral Recall", "Sol Ring", "Counterspell"}
 
