@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-type IdCardParams struct {
+type ArenaCardParams struct {
 	Id      int     `json:"id" validate:"required,min=1"`
 	Format  *string `json:"format,omitempty" validate:"omitempty,oneof=json text image"`
 	Version *string `json:"version,omitempty" validate:"omitempty,oneof=small normal large png border_crop art_crop"`
@@ -14,7 +14,7 @@ type IdCardParams struct {
 	Pretty  *bool   `json:"pretty,omitempty"`
 }
 
-func (p *IdCardParams) Validate() error {
+func (p *ArenaCardParams) Validate() error {
 	if p.Id <= 0 {
 		return fmt.Errorf("id must be greater than 0")
 	}
@@ -45,7 +45,7 @@ func (p *IdCardParams) Validate() error {
 	return nil
 }
 
-func (p *IdCardParams) ToURLValues() (url.Values, error) {
+func (p *ArenaCardParams) ToURLValues() (url.Values, error) {
 	if err := p.Validate(); err != nil {
 		return nil, err
 	}
