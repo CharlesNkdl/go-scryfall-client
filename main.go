@@ -6,8 +6,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/cnkdl/go-scryfall-client/scryfall"
-	"github.com/cnkdl/go-scryfall-client/scryfall/models/request/cards"
+	"github.com/CharlesNkdl/go-scryfall-client/scryfall"
+	"github.com/CharlesNkdl/go-scryfall-client/scryfall/models/request/cards"
 )
 
 func main() {

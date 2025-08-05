@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/cnkdl/go-scryfall-client/scryfall/models"
+	"github.com/CharlesNkdl/go-scryfall-client/scryfall/models"
 )
 
 type SymbolService struct {

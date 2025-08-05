@@ -8,9 +8,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/cnkdl/go-scryfall-client/scryfall/errors"
-	"github.com/cnkdl/go-scryfall-client/scryfall/models"
-	"github.com/cnkdl/go-scryfall-client/scryfall/services"
+	"github.com/CharlesNkdl/go-scryfall-client/scryfall/errors"
+	"github.com/CharlesNkdl/go-scryfall-client/scryfall/models"
+	"github.com/CharlesNkdl/go-scryfall-client/scryfall/services"
 )
 
 const (

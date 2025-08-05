@@ -1,4 +1,4 @@
-module github.com/cnkdl/go-scryfall-client
+module github.com/CharlesNkdl/go-scryfall-client
 
 go 1.24.4
 

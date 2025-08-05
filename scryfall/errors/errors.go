@@ -2,7 +2,7 @@ package errors
 
 import (
 	"fmt"
-	"github.com/cnkdl/go-scryfall-client/scryfall/models"
+	"github.com/CharlesNkdl/go-scryfall-client/scryfall/models"
 )
 
 type ApiError struct {

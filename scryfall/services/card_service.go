@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/cnkdl/go-scryfall-client/scryfall/models"
-	"github.com/cnkdl/go-scryfall-client/scryfall/models/card"
-	cardreq "github.com/cnkdl/go-scryfall-client/scryfall/models/request/cards"
+	"github.com/CharlesNkdl/go-scryfall-client/scryfall/models"
+	"github.com/CharlesNkdl/go-scryfall-client/scryfall/models/card"
+	cardreq "github.com/CharlesNkdl/go-scryfall-client/scryfall/models/request/cards"
 )
 
 type CardService struct {

@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/cnkdl/go-scryfall-client/scryfall/models/set"
+	"github.com/CharlesNkdl/go-scryfall-client/scryfall/models/set"
 )
 
 type SetService struct {

@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/cnkdl/go-scryfall-client/scryfall/models"
+	"github.com/CharlesNkdl/go-scryfall-client/scryfall/models"
 )
 
 type RulingService struct {
