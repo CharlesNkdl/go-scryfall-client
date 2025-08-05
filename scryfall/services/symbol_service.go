@@ -18,7 +18,6 @@ func (s *SymbolService) GetSymbol(ctx context.Context, symbol string) (*models.S
 	if err != nil {
 		return nil, err
 	}
-
 	var symbolResult models.Symbol
 	if err := s.Client.Do(req, &symbolResult); err != nil {
 		return nil, err

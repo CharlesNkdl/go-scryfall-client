@@ -28,7 +28,7 @@ var supportedLanguages = map[string]bool{
 	"qya": true, // Quenya
 }
 
-type SetCardParams struct {
+type CardsByCodeNumberLangParams struct {
 	Code   string  `json:"code" validate:"required,min=3,max=5"`
 	Number string  `json:"number" validate:"required"`
 	Lang   *string `json:"lang,omitempty" validate:"omitempty,oneof=en es fr de it pt ja ko ru zhs zht he la grc ar sa ph qya"`
@@ -39,7 +39,7 @@ type SetCardParams struct {
 	Pretty  *bool   `json:"pretty,omitempty"`
 }
 
-func (p *SetCardParams) Validate() error {
+func (p *CardsByCodeNumberLangParams) Validate() error {
 	if len(p.Code) < 3 || len(p.Code) > 5 {
 		return fmt.Errorf("code must be between 3 and 5 characters")
 	}
@@ -83,7 +83,7 @@ func (p *SetCardParams) Validate() error {
 	return nil
 }
 
-func (p *SetCardParams) ToURLValues() (url.Values, error) {
+func (p *CardsByCodeNumberLangParams) ToURLValues() (url.Values, error) {
 	if err := p.Validate(); err != nil {
 		return nil, err
 	}
@@ -104,14 +104,14 @@ func (p *SetCardParams) ToURLValues() (url.Values, error) {
 	return params, nil
 }
 
-func (p *SetCardParams) BuildPath() string {
+func (p *CardsByCodeNumberLangParams) BuildPath() string {
 	if p.Lang != nil && *p.Lang != "" {
 		return fmt.Sprintf("/cards/%s/%s/%s", p.Code, p.Number, *p.Lang)
 	}
 	return fmt.Sprintf("/cards/%s/%s", p.Code, p.Number)
 }
 
-func (p *SetCardParams) BuildFullURL(baseURL string) (string, error) {
+func (p *CardsByCodeNumberLangParams) BuildFullURL(baseURL string) (string, error) {
 	queryParams, err := p.ToURLValues()
 	if err != nil {
 		return "", err
@@ -124,8 +124,8 @@ func (p *SetCardParams) BuildFullURL(baseURL string) (string, error) {
 	return fullURL, nil
 }
 
-func NewSetCardParams(code, number string) *SetCardParams {
-	return &SetCardParams{
+func NewSetCardParams(code, number string) *CardsByCodeNumberLangParams {
+	return &CardsByCodeNumberLangParams{
 		Code:   strings.ToLower(code),
 		Number: number,
 	}
@@ -143,27 +143,27 @@ func GetSupportedLanguages() []string {
 	return langs
 }
 
-func (p *SetCardParams) WithLang(lang string) *SetCardParams {
+func (p *CardsByCodeNumberLangParams) WithLang(lang string) *CardsByCodeNumberLangParams {
 	p.Lang = &lang
 	return p
 }
 
-func (p *SetCardParams) WithFormat(format string) *SetCardParams {
+func (p *CardsByCodeNumberLangParams) WithFormat(format string) *CardsByCodeNumberLangParams {
 	p.Format = &format
 	return p
 }
 
-func (p *SetCardParams) WithVersion(version string) *SetCardParams {
+func (p *CardsByCodeNumberLangParams) WithVersion(version string) *CardsByCodeNumberLangParams {
 	p.Version = &version
 	return p
 }
 
-func (p *SetCardParams) WithFace(face string) *SetCardParams {
+func (p *CardsByCodeNumberLangParams) WithFace(face string) *CardsByCodeNumberLangParams {
 	p.Face = &face
 	return p
 }
 
-func (p *SetCardParams) WithPretty(pretty bool) *SetCardParams {
+func (p *CardsByCodeNumberLangParams) WithPretty(pretty bool) *CardsByCodeNumberLangParams {
 	p.Pretty = &pretty
 	return p
 }

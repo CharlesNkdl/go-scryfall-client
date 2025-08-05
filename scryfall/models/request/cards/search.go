@@ -117,7 +117,10 @@ func (p *SearchParams) Validate() error {
 	return nil
 }
 
-func (p *SearchParams) ToURLValues() url.Values {
+func (p *SearchParams) ToURLValues() (url.Values, error) {
+	if err := p.Validate(); err != nil {
+		return nil, err
+	}
 	values := url.Values{}
 
 	values.Set("q", p.Query)
@@ -158,7 +161,7 @@ func (p *SearchParams) ToURLValues() url.Values {
 		values.Set("pretty", "true")
 	}
 
-	return values
+	return values, nil
 }
 
 func NewSearchParams(query string) *SearchParams {
