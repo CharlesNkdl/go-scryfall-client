@@ -7,7 +7,7 @@ import (
 )
 
 type IdCardParams struct {
-	Id      int     `json:"id" validate:"required,min=1"`
+	Id      string  `json:"id" validate:"required,min=1"`
 	Format  *string `json:"format,omitempty" validate:"omitempty,oneof=json text image"`
 	Version *string `json:"version,omitempty" validate:"omitempty,oneof=small normal large png border_crop art_crop"`
 	Face    *string `json:"face,omitempty" validate:"omitempty,oneof=front back"`
@@ -15,8 +15,8 @@ type IdCardParams struct {
 }
 
 func (p *IdCardParams) Validate() error {
-	if p.Id <= 0 {
-		return fmt.Errorf("id must be greater than 0")
+	if p.Id == "" {
+		return fmt.Errorf("id must be a non-empty string")
 	}
 	if p.Format != nil {
 		switch *p.Format {
@@ -50,7 +50,7 @@ func (p *IdCardParams) ToURLValues() (url.Values, error) {
 		return nil, err
 	}
 	params := url.Values{}
-	params.Add("id", strconv.Itoa(p.Id))
+
 	if p.Format != nil {
 		params.Add("format", *p.Format)
 	}

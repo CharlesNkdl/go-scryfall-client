@@ -8,7 +8,7 @@ import (
 )
 
 type RandomCardParams struct {
-	Q       *string `json:"q,omitempty" validate:"omitempty"`
+	Query   *string `json:"q,omitempty" validate:"omitempty"`
 	Format  *string `json:"format,omitempty" validate:"omitempty,oneof=json text image"`
 	Face    *string `json:"face,omitempty" validate:"omitempty,oneof=front back"`
 	Version *string `json:"version,omitempty" validate:"omitempty,oneof=small normal large png art_crop border_crop"`
@@ -42,7 +42,7 @@ func (p *RandomCardParams) Validate() error {
 			return fmt.Errorf("face=back can only be used with format=image")
 		}
 	}
-	if p.Q != nil && strings.TrimSpace(*p.Q) == "" {
+	if p.Query != nil && strings.TrimSpace(*p.Query) == "" {
 		return fmt.Errorf("search query 'q' cannot be empty when provided")
 	}
 
@@ -54,8 +54,8 @@ func (p *RandomCardParams) ToURLValues() (url.Values, error) {
 		return nil, err
 	}
 	params := url.Values{}
-	if p.Q != nil {
-		params.Add("q", strings.TrimSpace(*p.Q))
+	if p.Query != nil {
+		params.Add("q", strings.TrimSpace(*p.Query))
 	}
 	if p.Format != nil {
 		params.Add("format", *p.Format)
@@ -99,13 +99,13 @@ func NewRandomCardParams() *RandomCardParams {
 func NewRandomCardParamsWithQuery(query string) *RandomCardParams {
 	trimmedQuery := strings.TrimSpace(query)
 	return &RandomCardParams{
-		Q: &trimmedQuery,
+		Query: &trimmedQuery,
 	}
 }
 
 func (p *RandomCardParams) WithQuery(query string) *RandomCardParams {
 	trimmedQuery := strings.TrimSpace(query)
-	p.Q = &trimmedQuery
+	p.Query = &trimmedQuery
 	return p
 }
 
@@ -130,17 +130,17 @@ func (p *RandomCardParams) WithPretty(pretty bool) *RandomCardParams {
 }
 
 func (p *RandomCardParams) HasQuery() bool {
-	return p.Q != nil && strings.TrimSpace(*p.Q) != ""
+	return p.Query != nil && strings.TrimSpace(*p.Query) != ""
 }
 
 func (p *RandomCardParams) GetQuery() string {
-	if p.Q != nil {
-		return strings.TrimSpace(*p.Q)
+	if p.Query != nil {
+		return strings.TrimSpace(*p.Query)
 	}
 	return ""
 }
 
 func (p *RandomCardParams) ClearQuery() *RandomCardParams {
-	p.Q = nil
+	p.Query = nil
 	return p
 }
