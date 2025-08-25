@@ -17,7 +17,8 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
-	fmt.Println("=== Test Scryfall API Client ===\n")
+	fmt.Println("=== Test Scryfall API Client ===")
+	fmt.Println()
 	fmt.Println("1. Test recherche par nom exact: 'Lightning Bolt'")
 	card1, err := cardService.GetByName(ctx, cards.NewExactCardParams("Lightning Bolt"))
 	if err != nil {
