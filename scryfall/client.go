@@ -17,9 +17,10 @@ const (
 	defaultBaseURL = "https://api.scryfall.com"
 )
 
+// Client represents a Scryfall API client with rate limiting and HTTP configuration.
 type Client struct {
 	httpClient *http.Client
-	BaseUrl    string
+	BaseURL    string
 
 	RateLimiter *rate.Limiter // asked by scryfall API documentation
 
@@ -30,12 +31,13 @@ type Client struct {
 	Symbols  *services.SymbolService
 }
 
+// NewClient creates a new Scryfall API client with default configuration.
 func NewClient() *Client {
 	c := &Client{
 		httpClient: &http.Client{
 			Timeout: 20 * time.Second,
 		},
-		BaseUrl:     defaultBaseURL,
+		BaseURL:     defaultBaseURL,
 		RateLimiter: rate.NewLimiter(1, 5),
 	}
 	c.Cards = &services.CardService{Client: c}
@@ -47,8 +49,9 @@ func NewClient() *Client {
 	return c
 }
 
+// NewRequest creates a new HTTP request with the given method and path.
 func (c *Client) NewRequest(ctx context.Context, method, path string) (*http.Request, error) {
-	url := c.BaseUrl + path
+	url := c.BaseURL + path
 	req, err := http.NewRequestWithContext(ctx, method, url, nil)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create request: %w", err)
@@ -59,6 +62,7 @@ func (c *Client) NewRequest(ctx context.Context, method, path string) (*http.Req
 	return req, nil
 }
 
+// Do executes an HTTP request and decodes the response into the provided interface.
 func (c *Client) Do(req *http.Request, v interface{}) error {
 	if err := c.RateLimiter.Wait(req.Context()); err != nil {
 		return err
@@ -71,7 +75,7 @@ func (c *Client) Do(req *http.Request, v interface{}) error {
 	if resp.StatusCode == http.StatusTooManyRequests {
 		apiErr := &models.ScryfallError{}
 		json.NewDecoder(resp.Body).Decode(&apiErr.Detail)
-		return &errors.ApiError{
+		return &errors.APIError{
 			ErrInfo: models.ScryfallError{
 				Status: resp.StatusCode,
 				Code:   "too_many_requests",
@@ -85,7 +89,7 @@ func (c *Client) Do(req *http.Request, v interface{}) error {
 			return fmt.Errorf("failed to decode error response: %w", err)
 		}
 		apiErr.Status = resp.StatusCode
-		return &errors.ApiError{ErrInfo: *apiErr}
+		return &errors.APIError{ErrInfo: *apiErr}
 	}
 	if v != nil {
 		if err := json.NewDecoder(resp.Body).Decode(v); err != nil {

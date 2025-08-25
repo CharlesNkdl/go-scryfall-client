@@ -7,7 +7,7 @@ import (
 )
 
 type IdCardParams struct {
-	Id      string  `json:"id" validate:"required,min=1"`
+	ID      string  `json:"id" validate:"required,min=1"`
 	Format  *string `json:"format,omitempty" validate:"omitempty,oneof=json text image"`
 	Version *string `json:"version,omitempty" validate:"omitempty,oneof=small normal large png border_crop art_crop"`
 	Face    *string `json:"face,omitempty" validate:"omitempty,oneof=front back"`
@@ -15,7 +15,7 @@ type IdCardParams struct {
 }
 
 func (p *IdCardParams) Validate() error {
-	if p.Id == "" {
+	if p.ID == "" {
 		return fmt.Errorf("id must be a non-empty string")
 	}
 	if p.Format != nil {

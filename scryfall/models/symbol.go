@@ -1,5 +1,6 @@
 package models
 
+// Symbol represents a mana symbol from the Scryfall API.
 type Symbol struct {
 	Object             string   `json:"object"`
 	Symbol             string   `json:"symbol"`
@@ -14,5 +15,5 @@ type Symbol struct {
 	Hybrid             bool     `json:"hybrid"`
 	Phyrexian          bool     `json:"phyrexian"`
 	GathererAlternates []string `json:"gatherer_alternates,omitempty"`
-	SvgUri             *string  `json:"svg_uri,omitempty"`
+	SvgURI             *string  `json:"svg_uri,omitempty"`
 }

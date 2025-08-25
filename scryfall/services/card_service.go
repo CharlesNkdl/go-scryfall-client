@@ -22,7 +22,7 @@ func (s *CardService) GetById(ctx context.Context, params *cardreq.IdCardParams)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get URL values: %w", err)
 	}
-	path := fmt.Sprintf("/cards/%s?%s", url.QueryEscape(params.Id), urlValues.Encode())
+	path := fmt.Sprintf("/cards/%s?%s", url.QueryEscape(params.ID), urlValues.Encode())
 	fmt.Println("Requesting card by ID:", path)
 	req, err := s.Client.NewRequest(ctx, "GET", path)
 	if err != nil {
