@@ -1,7 +1,9 @@
 package card
 
+// Layout represents the card layout type from the Scryfall API.
 type Layout string
 
+// Card layout types.
 const (
 	LayoutNormal          Layout = "normal"
 	LayoutSplit           Layout = "split"

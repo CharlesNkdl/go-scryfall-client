@@ -8,6 +8,9 @@
 *.so
 *.dylib
 
+# Built binary
+go-scryfall-client
+
 # Test binary, built with `go test -c`
 *.test
 

@@ -4,6 +4,7 @@ import (
 	"github.com/cnkdl/go-scryfall-client/scryfall/models"
 )
 
+// Gameplay represents the gameplay-related fields of a Magic card.
 type Gameplay struct {
 	AllParts       []Related      `json:"all_parts"`
 	CardFaces      []Face         `json:"card_faces,omitempty"`
